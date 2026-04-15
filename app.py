@@ -261,12 +261,15 @@ class AnalysisService:
         entry_price = None
         if current_price:
             base_entry = current_price
-            if ma120 and current_price > ma120:
-                base_entry = ma120
+            # 기본 2% 할인 (안전마진)
+            discount = 0.02
+            # 60일선 아래면 추가 할인 없음 (이미 싸니까)
+            if ma120 and current_price < ma120:
+                discount = 0.01  # 이미 눌린 상태, 소폭 할인만
+            # 변동성 높으면 추가 할인
             if vol and vol > 30:
-                discount = 0.03 + min((vol - 30) / 100, 0.02)
-                base_entry = base_entry * (1 - discount)
-            entry_price = round(base_entry, 2)
+                discount += 0.01 + min((vol - 30) / 200, 0.02)
+            entry_price = round(base_entry * (1 - discount), 2)
 
         return StockMetrics(
             ticker=ticker,
