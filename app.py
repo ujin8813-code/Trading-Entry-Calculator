@@ -1,13 +1,4 @@
-"""
-투자 사령부 대시보드 v2.0 (Mobile-Optimized)
-=============================================
-Streamlit Cloud 배포용 · 모바일 최적화
-
-배포 방법:
-1. GitHub 레포 생성 → app.py + requirements.txt 업로드
-2. share.streamlit.io 접속 → GitHub 레포 연결
-3. Deploy 클릭 → 끝!
-"""
+# Investment Command Center v2.1 - Mobile Optimized
 
 import streamlit as st
 import yfinance as yf
